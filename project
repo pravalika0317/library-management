@@ -1,0 +1,115 @@
+The Online Library Management System is a web-based application designed to help libraries efficiently manage books, users, and transactions. This system ensures smooth operations such as adding books, tracking borrowed items, and managing users through a secure and scalable platform.zzz---
+
+1. System Components & Technologies
+
+Frontend 
+
+If implemented, the frontend will use HTML, CSS, and JavaScript for a user-friendly interface.
+
+It will interact with the backend via RESTful API calls.
+
+
+Backend
+
+Developed using Python Flask, which provides lightweight and scalable API endpoints.
+
+Implements business logic for handling books, users, and transactions.
+
+
+Database
+
+Uses PostgreSQL, a powerful relational database system, to store data.
+
+SQLAlchemy ORM is used to interact with the database efficiently.
+
+
+Version Control
+
+GitHub is used for source code management, version control, and collaboration.
+---
+
+2. System Requirements
+
+User Types
+
+1. Admin:
+
+Can add, remove, and update books.
+
+Manages user registrations and access.
+
+Views transaction history to track borrowing and returning activities.
+
+2. User:
+
+Can register and log in.
+
+Can browse the available books.
+
+Can borrow and return books.
+---
+
+3. Functional Requirements
+
+Book Management
+
+Add Books: Admins can add new books with details like title, author, genre, and availability.
+
+Remove Books: Admins can remove outdated or unavailable books.
+
+Update Books: Admins can edit book details.
+
+List Books: Users can browse available books.
+
+
+User Management
+
+Register Users: Users can create an account.
+
+View Profile: Users can check their details and borrowed books.
+
+Update Information: Users can update personal details.
+
+
+Borrow/Return Management
+
+Users can borrow books, which are recorded with due dates.
+
+Users can return books, and the system updates availability.
+
+The system prevents borrowing more than allowed limits.
+
+
+Transaction History
+
+Tracks all borrowing and returning activities.
+
+Admins can generate reports on book usage.
+
+---
+4. Non-Functional Requirements
+
+Security
+
+Authentication & Authorization: Uses secure login for users and admins.
+
+Data Protection: Ensures encrypted passwords and protected transactions.
+
+
+Scalability
+
+The system should be capable of handling a large number of books and users.
+
+Uses PostgreSQL for efficient data storage and queries.
+
+
+Performance
+
+Fast query responses using optimized database indexing.
+
+Handles concurrent user transactions without performance degradation.
+
+---
+Conclusion
+
+This Online Library Management System aims to simplify library operations through a secure and scalable web-based platform. By leveraging Flask, PostgreSQL, and RESTful APIs, it ensures efficient book tracking, user management, and transaction recording.
