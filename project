@@ -1,115 +1,319 @@
-The Online Library Management System is a web-based application designed to help libraries efficiently manage books, users, and transactions. This system ensures smooth operations such as adding books, tracking borrowed items, and managing users through a secure and scalable platform.zzz---
+Online Library Management System Documentation
+The Online Library Management System is a web-based application designed to help libraries efficiently manage books, users, and transactions.
+This system ensures smooth operations such as adding books, tracking borrowed items, and managing users through a secure and scalable platform.
 
 1. System Components & Technologies
-
-Frontend 
-
-If implemented, the frontend will use HTML, CSS, and JavaScript for a user-friendly interface.
-
-It will interact with the backend via RESTful API calls.
-
-
+Frontend
+Uses HTML, CSS, and JavaScript to create an intuitive user interface.
+Communicates with the backend through RESTful API calls.
 Backend
-
-Developed using Python Flask, which provides lightweight and scalable API endpoints.
-
+Built using Python Flask, which provides lightweight and scalable API endpoints.
 Implements business logic for handling books, users, and transactions.
-
-
 Database
-
-Uses PostgreSQL, a powerful relational database system, to store data.
-
-SQLAlchemy ORM is used to interact with the database efficiently.
-
-
+Uses PostgreSQL, a relational database, to store and manage data.
+SQLAlchemy ORM is used to interact efficiently with the database.
 Version Control
-
 GitHub is used for source code management, version control, and collaboration.
----
 
 2. System Requirements
-
 User Types
-
-1. Admin:
-
-Can add, remove, and update books.
-
-Manages user registrations and access.
-
-Views transaction history to track borrowing and returning activities.
-
-2. User:
-
-Can register and log in.
-
-Can browse the available books.
-
-Can borrow and return books.
----
+Admin
+Add, remove, and update books.
+Manage user registrations and access.
+View transaction history.
+User
+Register and log in.
+Browse available books.
+Borrow and return books.
 
 3. Functional Requirements
-
 Book Management
-
-Add Books: Admins can add new books with details like title, author, genre, and availability.
-
-Remove Books: Admins can remove outdated or unavailable books.
-
-Update Books: Admins can edit book details.
-
-List Books: Users can browse available books.
+Add Books – Admins can add books with details like title, author, genre, and availability.
+Remove Books – Admins can remove outdated or unavailable books.
+Update Books – Admins can edit book details.
+List Books – Users can browse available books.
 
 
 User Management
-
-Register Users: Users can create an account.
-
-View Profile: Users can check their details and borrowed books.
-
-Update Information: Users can update personal details.
-
-
+Register Users – Users can create an account.
+View Profile – Users can check their details and borrowed books.
+Update Information – Users can update personal details.
 Borrow/Return Management
-
-Users can borrow books, which are recorded with due dates.
-
-Users can return books, and the system updates availability.
-
-The system prevents borrowing more than allowed limits.
-
-
+Users can borrow books, recorded with due dates.
+Users can return books, updating availability.
+The system prevents exceeding borrowing limits.
 Transaction History
-
 Tracks all borrowing and returning activities.
+Admins can generate book usage reports.
 
-Admins can generate reports on book usage.
-
----
 4. Non-Functional Requirements
-
 Security
-
-Authentication & Authorization: Uses secure login for users and admins.
-
-Data Protection: Ensures encrypted passwords and protected transactions.
-
-
+Authentication & Authorization – Secure login for users and admins.
+Data Protection – Encrypted passwords and protected transactions.
 Scalability
-
-The system should be capable of handling a large number of books and users.
-
-Uses PostgreSQL for efficient data storage and queries.
-
-
+Supports a large number of books and users.
+Uses PostgreSQL for efficient data handling.
 Performance
-
-Fast query responses using optimized database indexing.
-
+Optimized database indexing for fast query responses.
 Handles concurrent user transactions without performance degradation.
+5.  Authentication APIs
+Handles user authentication with JWT-based security.
+1. User Registration
+Endpoint: /api/auth/register
+Method: POST
+Description: Registers a new user.
+Request Body (JSON):
+json
+Copy
+Edit
+{
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "mobile": "9876543210",
+  "password": "securepassword"
+}
+Response (JSON):
+json
+Copy
+Edit
+{
+  "message": "User registered successfully",
+  "user_id": 1
+}
+1.2 User Login
+Endpoint: /api/auth/login
+Method: POST
+Description: Logs in a user and returns a JWT token.
+Request Body (JSON):
+json
+Copy
+Edit
+{
+  "email": "johndoe@example.com",
+  "password": "securepassword"
+}
+Response (JSON):
+json
+Copy
+Edit
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR...",
+  "user": {
+    "id": 1,
+    "name": "John Doe",
+    "role": "user"
+  }
+}
+2. Book Management APIs (Admin Only)
+Allows the admin to manage book records.
 
----
+2.1 Add a New Book
+Endpoint: /api/books
+Method: POST
+Description: Adds a new book to the system.
+Request Body (JSON):
+json
+Copy
+Edit
+{
+  "title": "Python Basics",
+  "author": "John Smith",
+  "category": "Programming",
+  "isbn": "123456789",
+  "available_copies": 5
+}
+Response (JSON):
+json
+Copy
+Edit
+{
+  "message": "Book added successfully",
+  "book_id": 101
+}
+2.2 Update Book Details
+Endpoint: /api/books/{book_id}
+Method: PUT
+Description: Updates book details.
+Request Body (JSON):
+json
+Copy
+Edit
+{
+  "title": "Python Basics - Updated",
+  "author": "John Smith",
+  "category": "Programming",
+  "available_copies": 4
+}
+Response (JSON):
+json
+Copy
+Edit
+{
+  "message": "Book updated successfully"
+}
+2.3 Delete a Book
+Endpoint: /api/books/{book_id}
+Method: DELETE
+Description: Removes a book from the system.
+Response (JSON):
+json
+Copy
+Edit
+{
+  "message": "Book deleted successfully"
+}
+2.4 Fetch All Books
+Endpoint: /api/books
+Method: GET
+Description: Retrieves a list of available books.
+Response (JSON):
+json
+Copy
+Edit
+[
+  {
+    "id": 101,
+    "title": "Python Basics",
+    "author": "John Smith",
+    "category": "Programming",
+    "available_copies": 5
+  }
+]
+3. User Management APIs
+Handles user details and account management.
+
+3.1 Fetch User Profile
+Endpoint: /api/users/{user_id}
+Method: GET
+Description: Retrieves user details.
+Response (JSON):
+json
+Copy
+Edit
+{
+  "id": 1,
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "role": "user"
+}
+3.2 Update User Profile
+Endpoint: /api/users/{user_id}
+Method: PUT
+Description: Updates user details.
+Request Body (JSON):
+json
+Copy
+Edit
+{
+  "name": "John Doe Updated",
+  "email": "john.doe@example.com"
+}
+Response (JSON):
+json
+Copy
+Edit
+{
+  "message": "Profile updated successfully"
+}
+4. Borrow & Return APIs
+Handles book borrowing and returns.
+
+4.1 Borrow a Book
+Endpoint: /api/borrow
+Method: POST
+Description: Allows a user to borrow a book.
+Request Body (JSON):
+json
+Copy
+Edit
+{
+  "user_id": 1,
+  "book_id": 101,
+  "borrow_date": "2025-02-27",
+  "return_date": "2025-03-10"
+}
+Response (JSON):
+json
+Copy
+Edit
+{
+  "message": "Book borrowed successfully",
+  "transaction_id": 501
+}
+4.2 Return a Book
+Endpoint: /api/return/{transaction_id}
+Method: PUT
+Description: Returns a borrowed book.
+Response (JSON):
+json
+Copy
+Edit
+{
+  "message": "Book returned successfully"
+}
+5. Transaction History APIs (Admin Only)
+Allows the admin to view all book transactions.
+
+5.1 Fetch Transaction History
+Endpoint: /api/transactions
+Method: GET
+Description: Retrieves all book transactions.
+Response (JSON):
+json
+Copy
+Edit
+[
+  {
+    "transaction_id": 501,
+    "user_id": 1,
+    "book_id": 101,
+    "borrow_date": "2025-02-27",
+    "return_date": "2025-03-10",
+    "status": "Returned"
+  }
+]
+6. Notifications & Payment APIs
+Handles notifications and book purchases.
+
+6.1 Due Date Notification
+Endpoint: /api/notifications/due
+Method: GET
+Description: Sends reminders for books due soon.
+Response (JSON):
+json
+Copy
+Edit
+{
+  "message": "Reminder sent for book return"
+}
+6.2 Purchase a Book
+Endpoint: /api/payment/purchase
+Method: POST
+Description: Allows users to buy a book.
+Request Body (JSON):
+json
+Copy
+Edit
+{
+  "user_id": 1,
+  "book_id": 101,
+  "payment_method": "Credit Card"
+}
+Response (JSON):
+json
+Copy
+Edit
+{
+  "message": "Book purchased successfully",
+  "order_id": 901
+}
+7. API Security
+To ensure security, the system implements:
+
+JWT Authentication – Token-based authentication for secure login.
+Role-Based Access Control (RBAC) – Restricts access to admin-only functions.
+Input Validation – Prevents SQL injection & XSS attacks.
+
 Conclusion
 
-This Online Library Management System aims to simplify library operations through a secure and scalable web-based platform. By leveraging Flask, PostgreSQL, and RESTful APIs, it ensures efficient book tracking, user management, and transaction recording.
+This Online Library Management System provides an efficient and scalable way to manage books, users, and transactions. Using Flask, PostgreSQL, and RESTful APIs, it ensures secure book tracking, user management, and transaction logging
